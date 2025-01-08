@@ -1,19 +1,11 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
-project.ext.react = [
-    enableHermes: false,
-    entryFile: "index.js",
-]
+import com.android.build.OutputFile
 
-apply from: "../../node_modules/react-native/react.gradle"
-
-def enableSeparateBuildPerCPUArchitecture = false
-def enableProguardInReleaseBuilds = false
-def jscFlavor = 'org.webkit:android-jsc:+'
+def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
 android {
-    ndkVersion rootProject.ext.ndkVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     namespace "com.fitrunpro"
@@ -23,9 +15,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
-        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
-        buildConfigField "boolean", "IS_HERMES_ENABLED", "false"
     }
 
     signingConfigs {
@@ -35,47 +24,37 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            // Configure release signing if needed
+        }
     }
 
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            buildConfigField "boolean", "DEBUG", "true"
         }
         release {
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            buildConfigField "boolean", "DEBUG", "false"
         }
-    }
-
-    packagingOptions {
-        pickFirst 'lib/x86/libc++_shared.so'
-        pickFirst 'lib/x86_64/libc++_shared.so'
-        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
-        pickFirst 'lib/arm64-v8a/libc++_shared.so'
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    
-    implementation "com.facebook.react:react-native:+"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation("com.facebook.react:react-android")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
-    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}")
-    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
-    debugImplementation("com.squareup.okhttp3:okhttp:4.9.2")
+    debugImplementation("com.facebook.flipper:flipper:0.182.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.182.0")
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:0.182.0")
 
-    if (project.ext.react.enableHermes) {
+    if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
-        implementation "org.webkit:android-jsc:+"
+        implementation("org.webkit:android-jsc:+")
     }
-
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
 applyNativeModulesAppBuildGradle(project)

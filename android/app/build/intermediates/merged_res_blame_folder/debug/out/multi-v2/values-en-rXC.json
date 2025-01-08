@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.fitrunpro.app-mergeDebugResources-31:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.fitrunpro.app-mergeDebugResources-26:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\akity\\.gradle\\caches\\transforms-3\\4147f26a61fb6196770ea38e58daddf3\\transformed\\core-1.8.0\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "source": "C:\\Users\\akity\\.gradle\\caches\\transforms-3\\4ccda439f18df796191f8348d15af64d\\transformed\\core-1.9.0\\res\\values-en-rXC\\values-en-rXC.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\akity\\.gradle\\caches\\transforms-3\\2a4aae05575dd0fe5825b93a559ca16a\\transformed\\appcompat-1.4.2\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "source": "C:\\Users\\akity\\.gradle\\caches\\transforms-3\\0187a2fc8d1287256ae168ccf02fbcc8\\transformed\\appcompat-1.6.1\\res\\values-en-rXC\\values-en-rXC.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

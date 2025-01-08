@@ -10,58 +10,51 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 
-// Remove the ReactNativeFlipper import and use the local one
-import com.fitrunpro.ReactNativeFlipper; // Changed this line
-
 public class MainApplication extends Application implements ReactApplication {
-
-  private final ReactNativeHost mReactNativeHost =
-      new DefaultReactNativeHost(this) {
+    private final ReactNativeHost mReactNativeHost = new DefaultReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+            return BuildConfig.DEBUG;
         }
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          return packages;
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+            // Packages that cannot be autolinked yet can be added manually here
+            return packages;
         }
 
         @Override
         protected String getJSMainModuleName() {
-          return "index";
+            return "index";
         }
 
         @Override
         protected boolean isNewArchEnabled() {
-          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+            return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
         }
 
         @Override
         protected Boolean isHermesEnabled() {
-          return BuildConfig.IS_HERMES_ENABLED;
+            return BuildConfig.IS_HERMES_ENABLED;
         }
-      };
+    };
 
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
-  }
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
+    }
 
-   @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      DefaultNewArchitectureEntryPoint.load();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+        if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+            DefaultNewArchitectureEntryPoint.load();
+        }
+        if (BuildConfig.DEBUG) {
+            com.fitrunpro.ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+        }
     }
-    // Comment out this block if you're still having issues
-    /*
-    if (BuildConfig.DEBUG) {
-      ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    }
-    */
-  }
 }
